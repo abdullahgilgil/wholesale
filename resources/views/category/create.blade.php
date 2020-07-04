@@ -31,21 +31,21 @@
                         <div class="form-group row">
                            <label for="name" class="col-sm-2 col-form-label">Name</label>
                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="name" placeholder="Category Name">
+                              <input type="text" name="name" class="form-control" id="name" placeholder="Category Name">
                            </div>
                         </div>
                         <div class="form-group row">
                            <label class="col-sm-2 col-form-label">Parent Category</label>
                            <div class="col-sm-10">
                               <div class="select2-purple" data-select2-id="38">
-                                 <select class="select2 select2-hidden-accessible" multiple="" data-placeholder="Select Parent Category" data-dropdown-css-class="select2-purple" style="width: 100%;" data-select2-id="15" tabindex="-1" aria-hidden="true">
-                                    <option data-select2-id="47">Alabama</option>
-                                    <option data-select2-id="48">Alaska</option>
-                                    <option data-select2-id="49">California</option>
-                                    <option data-select2-id="50">Delaware</option>
-                                    <option data-select2-id="51">Tennessee</option>
-                                    <option data-select2-id="52">Texas</option>
-                                    <option data-select2-id="53">Washington</option>
+                                 <select class="select2 select2-hidden-accessible" name="parent_id[]" multiple="" data-placeholder="Select Parent Category" data-dropdown-css-class="select2-purple" style="width: 100%;" data-select2-id="15" tabindex="-1" aria-hidden="true">
+                                    <option data-select2-id="47" value="">Alabama</option>
+                                    <option data-select2-id="48" value="">Alaska</option>
+                                    <option data-select2-id="49" value="">California</option>
+                                    <option data-select2-id="50" value="">Delaware</option>
+                                    <option data-select2-id="51" value="">Tennessee</option>
+                                    <option data-select2-id="52" value="">Texas</option>
+                                    <option data-select2-id="53" value="">Washington</option>
                                  </select>
                               </div>
                            </div>
@@ -53,7 +53,7 @@
                         <div class="form-group row">
                            <label for="description" class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-10">
-                               <textarea class="textarea form-group" placeholder="Place some text here" id="summernote"
+                               <textarea class="textarea form-group" name="description" placeholder="Place some text here" id="description"
                                          style="width: 100%; height: 200px; font-size: 14px;
                                          line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
                             </textarea>

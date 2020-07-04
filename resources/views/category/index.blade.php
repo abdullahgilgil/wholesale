@@ -23,6 +23,7 @@
                <div class="card">
                   <div class="card-header">
                      <h3 class="card-title">All Categories</h3>
+                     <a href="{{route('category.create')}}" class="btn btn-success float-right">Add New Category</a>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
@@ -39,9 +40,9 @@
                               <th class="sorting">Name</th>
                               <th class="sorting">Parent ID's</th>
                               <th class="sorting">Slug</th>
-                              <th class="sorting">Created At</th>
-                              <th class="sorting">Updated At</th>
-                              <th class="sorting">Deleted At</th>
+                              <th class="sorting">Description</th>
+                              <th class="sorting">Edit</th>
+                              <th class="sorting">Delete</th>
                            </tr>
                         </thead>
                         <tbody>
@@ -50,61 +51,55 @@
                               <td>Household</td>
                               <td>1,2,3</td>
                               <td>household</td>
-                              <td>12.12.2020</td>
-                              <td>12.12.2020</td>
-                              <td>null</td>
+                              <td>Household products is used for ...</td>
+                              <td>
+                                 <a href="" class="btn btn-sm btn-warning">Edit</a>
+                              </td>
+                              <td><button class="btn btn-sm btn-danger">Delete</button></td>
                            </tr>
                            <tr role="row" class="odd">
                               <td class="sorting_1 dtr-control">1</td>
                               <td>Household</td>
                               <td>1,2,3</td>
                               <td>household</td>
-                              <td>12.12.2020</td>
-                              <td>12.12.2020</td>
-                              <td>null</td>
+                              <td>Household products is used for ...</td>
+                              <td>
+                                 <a href="" class="btn btn-sm btn-warning">Edit</a>
+                              </td>
+                              <td><button class="btn btn-sm btn-danger">Delete</button></td>
                            </tr>
                            <tr role="row" class="odd">
                               <td class="sorting_1 dtr-control">1</td>
                               <td>Household</td>
                               <td>1,2,3</td>
                               <td>household</td>
-                              <td>12.12.2020</td>
-                              <td>12.12.2020</td>
-                              <td>null</td>
+                              <td>Household products is used for ...</td>
+                              <td>
+                                 <a href="" class="btn btn-sm btn-warning">Edit</a>
+                              </td>
+                              <td><button class="btn btn-sm btn-danger">Delete</button></td>
                            </tr>
                            <tr role="row" class="odd">
                               <td class="sorting_1 dtr-control">1</td>
                               <td>Household</td>
                               <td>1,2,3</td>
                               <td>household</td>
-                              <td>12.12.2020</td>
-                              <td>12.12.2020</td>
-                              <td>null</td>
+                              <td>Household products is used for ...</td>
+                              <td>
+                                 <a href="" class="btn btn-sm btn-warning">Edit</a>
+                              </td>
+                              <td><button class="btn btn-sm btn-danger">Delete</button></td>
                            </tr>
                            <tr role="row" class="odd">
                               <td class="sorting_1 dtr-control">1</td>
                               <td>Household</td>
                               <td>1,2,3</td>
                               <td>household</td>
-                              <td>12.12.2020</td>
-                              <td>12.12.2020</td>
-                              <td>null</td>
-                           </tr><tr role="row" class="odd">
-                              <td class="sorting_1 dtr-control">1</td>
-                              <td>Household</td>
-                              <td>1,2,3</td>
-                              <td>household</td>
-                              <td>12.12.2020</td>
-                              <td>12.12.2020</td>
-                              <td>null</td>
-                           </tr><tr role="row" class="odd">
-                              <td class="sorting_1 dtr-control">1</td>
-                              <td>Household</td>
-                              <td>1,2,3</td>
-                              <td>household</td>
-                              <td>12.12.2020</td>
-                              <td>12.12.2020</td>
-                              <td>null</td>
+                              <td>Household products is used for ...</td>
+                              <td>
+                                 <a href="" class="btn btn-sm btn-warning">Edit</a>
+                              </td>
+                              <td><button class="btn btn-sm btn-danger">Delete</button></td>
                            </tr>
 
                         </tbody>

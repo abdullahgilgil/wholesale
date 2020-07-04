@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('brand_id');
             $table->string('product_code')->nullable();
-            $table->bigInteger('barcode');
+            $table->bigInteger('pack_barcode');
             $table->bigInteger('single_barcode');
             $table->string('name');
             $table->string('title')->nullable();
@@ -37,10 +37,10 @@ class CreateProductsTable extends Migration
             $table->decimal('single_price',8,2)->nullable();
             $table->decimal('layer_price',8,2)->nullable();
             $table->decimal('pallet_price',8,2)->nullable();
-            $table->string('case_qty');
-            $table->string('layer_qty');
-            $table->string('pallet_qty');
-            $table->string('total_stock');
+            $table->integer('case_qty');
+            $table->integer('layer_qty');
+            $table->integer('pallet_qty');
+            $table->integer('total_stock');
             $table->timestamps();
             $table->softDeletes();
 
