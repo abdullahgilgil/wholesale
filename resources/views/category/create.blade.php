@@ -26,27 +26,41 @@
                   </div>
                   <!-- /.card-header -->
                   <!-- form start -->
-                  <form class="form-horizontal" id="addCategory">
-                     <div class="card-body">
+                  <form class="form-horizontal" id="addCategory" action="{{route('category.store')}}" method="POST">
+                     @csrf
+                      <div class="card-body">
                         <div class="form-group row">
                            <label for="name" class="col-sm-2 col-form-label">Name</label>
                            <div class="col-sm-10">
-                              <input type="text" name="name" class="form-control" id="name" placeholder="Category Name">
+                              <input type="text" name="name" class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}" id="name" placeholder="Category Name">
+                               @if($errors->has('name'))
+                                   <div class="text-danger mt-2">
+                                       {{$errors->first('name')}}
+                                   </div>
+                               @endif
                            </div>
+
+
                         </div>
                         <div class="form-group row">
                            <label class="col-sm-2 col-form-label">Parent Category</label>
                            <div class="col-sm-10">
                               <div class="select2-purple" data-select2-id="38">
-                                 <select class="select2 select2-hidden-accessible" name="parent_id[]" multiple="" data-placeholder="Select Parent Category" data-dropdown-css-class="select2-purple" style="width: 100%;" data-select2-id="15" tabindex="-1" aria-hidden="true">
-                                    <option data-select2-id="47" value="">Alabama</option>
-                                    <option data-select2-id="48" value="">Alaska</option>
-                                    <option data-select2-id="49" value="">California</option>
-                                    <option data-select2-id="50" value="">Delaware</option>
-                                    <option data-select2-id="51" value="">Tennessee</option>
-                                    <option data-select2-id="52" value="">Texas</option>
-                                    <option data-select2-id="53" value="">Washington</option>
+                                 <select class="form-control" name="parent_category" style="width: 100%;">
+
+                                    <option value="">Select Parent Category</option>
+                                    <option value="0">No Parent Category</option>
+                                    @if($categories)
+                                        @foreach($categories as $category)
+                                    <option  value="{{$category->id}}">{{$category->name}}</option>
+                                         @endforeach
+                                    @endif
                                  </select>
+                                  @if($errors->has('parent_category'))
+                                      <div class="text-danger mt-2">
+                                          {{$errors->first('parent_category')}}
+                                      </div>
+                                  @endif
                               </div>
                            </div>
                         </div>
@@ -57,6 +71,11 @@
                                          style="width: 100%; height: 200px; font-size: 14px;
                                          line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
                             </textarea>
+                                @if($errors->has('description'))
+                                    <div class="text-danger mt-2">
+                                        {{$errors->first('description')}}
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
@@ -67,6 +86,7 @@
                      </div>
                      <!-- /.card-footer -->
                   </form>
+
                </div>
             </div>
          </div>
@@ -105,5 +125,43 @@
               height: 100
           });
       });
+   </script>
+   <script>
+       {{--let form = document.querySelector('#addCategory');--}}
+
+       {{--form.addEventListener('submit',(e) => {--}}
+       {{--    e.preventDefault();--}}
+       {{--    let token = document.querySelector("meta[name='csrf-token']").getAttribute('content');--}}
+       {{--    let url = "{{route('category.store')}}";--}}
+       {{--    let name = form.name.value;--}}
+       {{--    let parent_id = form.parent_id.value;--}}
+       {{--    let description = form.description.value;--}}
+
+       {{--    console.log(name, parent_id, description);--}}
+
+       {{--    fetch(url, {--}}
+       {{--        headers: {--}}
+       {{--            "Content-Type": "application/json",--}}
+       {{--            "Accept": "application/json, text-plain, */*",--}}
+       {{--            "X-Requested-With": "XMLHttpRequest",--}}
+       {{--            "X-CSRF-TOKEN": token--}}
+       {{--        },--}}
+       {{--        method: 'post',--}}
+       {{--        credentials: "same-origin",--}}
+       {{--        body: JSON.stringify({--}}
+       {{--            name : name,--}}
+       {{--            parent_id : parent_id,--}}
+       {{--            description : description--}}
+       {{--        })--}}
+       {{--    })--}}
+       {{--        .then(res => res.json())--}}
+       {{--        .then(data => console.log(data))--}}
+       {{--        .catch(function(error) {--}}
+       {{--            console.log(error);--}}
+       {{--        });--}}
+
+       {{--});--}}
+
+
    </script>
 @endpush()
