@@ -32,7 +32,8 @@
                         <div class="form-group row">
                            <label for="name" class="col-sm-2 col-form-label">Name</label>
                            <div class="col-sm-10">
-                              <input type="text" name="name" class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}" id="name" placeholder="Category Name">
+                              <input type="text" name="name" class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}"
+                                     id="name" placeholder="Category Name" value="{{old('name')}}">
                                @if($errors->has('name'))
                                    <div class="text-danger mt-2">
                                        {{$errors->first('name')}}
@@ -43,19 +44,19 @@
 
                         </div>
                         <div class="form-group row">
-                           <label class="col-sm-2 col-form-label">Parent Category</label>
+                           <label class="col-sm-2 col-form-label" for="category">Parent Category</label>
                            <div class="col-sm-10">
-                              <div class="select2-purple" data-select2-id="38">
-                                 <select class="form-control" name="parent_category" style="width: 100%;">
-
-                                    <option value="">Select Parent Category</option>
-                                    <option value="0">No Parent Category</option>
+                              <div class="">
+                                 <select class="form-control" name="parent_category" id="category">
+                                    <option value="" {{old('parent_category') == '' ? 'selected' : ''}}>Select Parent Category</option>
+                                    <option value="0" {{old('parent_category') == '0' ? 'selected' : ''}}>No Parent Category</option>
                                     @if($categories)
-                                        @foreach($categories as $category)
-                                    <option  value="{{$category->id}}">{{$category->name}}</option>
-                                         @endforeach
+                                       @foreach($categories as $category)
+                                          <option value="{{$category->id}}" {{old('parent_category') == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                       @endforeach
                                     @endif
                                  </select>
+
                                   @if($errors->has('parent_category'))
                                       <div class="text-danger mt-2">
                                           {{$errors->first('parent_category')}}
