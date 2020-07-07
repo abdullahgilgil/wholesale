@@ -29,10 +29,15 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+            //       BURAYA DIKKAT //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////// CATEGORY IMAGE EKLEME FASLINI YAP VE EKLEMEYE BASLA ARTIK /////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         $data = $request->validate([
             'name' => 'required | min:4',
             'parent_category' => 'required',
-            'description' => 'required | min:20'
+            'description' => 'sometimes|required|min:20'
         ]);
         $data['slug'] = Str::slug($request->name, '-');
 

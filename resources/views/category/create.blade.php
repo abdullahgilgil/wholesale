@@ -80,6 +80,16 @@
                             </div>
                         </div>
 
+                         <div class="form-group row">
+                            <label for="image_path" class="col-sm-2 col-form-label">Category Image</label>
+                            <div class="input-group col-sm-10">
+                               <div class="custom-file">
+                                  <input type="file" class="custom-file-input" id="image_path" name="image_path">
+                                  <label class="custom-file-label" for="exampleInputFile">Choose Category Image</label>
+                               </div>
+                            </div>
+                         </div><!-- Images -->
+
                        </div>
                                <!-- /.card-body -->
                      <div class="card-footer">
