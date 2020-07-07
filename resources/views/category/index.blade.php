@@ -41,66 +41,27 @@
                               <th class="sorting">Parent ID's</th>
                               <th class="sorting">Slug</th>
                               <th class="sorting">Description</th>
+                              <th class="sorting">Image</th>
                               <th class="sorting">Edit</th>
                               <th class="sorting">Delete</th>
                            </tr>
                         </thead>
                         <tbody>
+                        @foreach($categories as $category)
                            <tr role="row" class="odd">
-                              <td class="sorting_1 dtr-control">1</td>
-                              <td>Household</td>
-                              <td>1,2,3</td>
-                              <td>household</td>
-                              <td>Household products is used for ...</td>
+                              <td class="sorting_1 dtr-control">{{$category->id}}</td>
+                              <td>{{$category->name}}</td>
+                              <td>{{$category->parent_id}}</td>
+                              <td>{{$category->slug}}</td>
+                              <td>{!! $category->description !!}</td>
+                              <td><img src="{{asset('storage/'.$category->image_path)}}" alt="" style="max-height: 60px;"></td>
                               <td>
-                                 <a href="" class="btn btn-sm btn-warning">Edit</a>
+                                 <a href="{{route('category.edit', $category->id)}}" class="btn btn-sm btn-warning">Edit</a>
                               </td>
                               <td><button class="btn btn-sm btn-danger">Delete</button></td>
                            </tr>
-                           <tr role="row" class="odd">
-                              <td class="sorting_1 dtr-control">1</td>
-                              <td>Household</td>
-                              <td>1,2,3</td>
-                              <td>household</td>
-                              <td>Household products is used for ...</td>
-                              <td>
-                                 <a href="" class="btn btn-sm btn-warning">Edit</a>
-                              </td>
-                              <td><button class="btn btn-sm btn-danger">Delete</button></td>
-                           </tr>
-                           <tr role="row" class="odd">
-                              <td class="sorting_1 dtr-control">1</td>
-                              <td>Household</td>
-                              <td>1,2,3</td>
-                              <td>household</td>
-                              <td>Household products is used for ...</td>
-                              <td>
-                                 <a href="" class="btn btn-sm btn-warning">Edit</a>
-                              </td>
-                              <td><button class="btn btn-sm btn-danger">Delete</button></td>
-                           </tr>
-                           <tr role="row" class="odd">
-                              <td class="sorting_1 dtr-control">1</td>
-                              <td>Household</td>
-                              <td>1,2,3</td>
-                              <td>household</td>
-                              <td>Household products is used for ...</td>
-                              <td>
-                                 <a href="" class="btn btn-sm btn-warning">Edit</a>
-                              </td>
-                              <td><button class="btn btn-sm btn-danger">Delete</button></td>
-                           </tr>
-                           <tr role="row" class="odd">
-                              <td class="sorting_1 dtr-control">1</td>
-                              <td>Household</td>
-                              <td>1,2,3</td>
-                              <td>household</td>
-                              <td>Household products is used for ...</td>
-                              <td>
-                                 <a href="" class="btn btn-sm btn-warning">Edit</a>
-                              </td>
-                              <td><button class="btn btn-sm btn-danger">Delete</button></td>
-                           </tr>
+                        @endforeach
+
 
                         </tbody>
                      </table>

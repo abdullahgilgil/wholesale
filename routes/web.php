@@ -29,9 +29,9 @@ Route::group(["middleware" => "auth"], function() {
 //      Route::get('/{category}', 'CategoryController@show')->name('.show');
       Route::get('/create', 'CategoryController@create')->name('.create');
       Route::post('/', 'CategoryController@store')->name('.store');
-      Route::get('/{category}/edit', 'CategoryController@edit')->name('.edit');
-      Route::patch('/{category}', 'CategoryController@update')->name('.update');
-      Route::delete('/{category}', 'CategoryController@destroy')->name('.destroy');
+      Route::get('/{id}/edit', 'CategoryController@edit')->name('.edit');
+      Route::patch('/{id}', 'CategoryController@update')->name('.update');
+      Route::delete('/{id}', 'CategoryController@destroy')->name('.destroy');
 
    });
 

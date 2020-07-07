@@ -20,13 +20,24 @@
       <div class="container-fluid">
          <div class="row">
             <div class="col-lg-8 offset-lg-2">
+               @if(session()->has('message'))
+                  <div style="position: relative; min-height: 60px;">
+                     <div class="alert alert-dismissible alert-{{session('message_tur')}}" role="alert" style="position: absolute; top: 10px;">
+                        <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>{{strtoupper(session('message_tur'))}}</strong>
+                        {{session('message')}}
+                     </div>
+                  </div>
+               @endif
                <div class="card card-info">
                   <div class="card-header">
                      <h3 class="card-title">Add New Category</h3>
                   </div>
                   <!-- /.card-header -->
                   <!-- form start -->
-                  <form class="form-horizontal" id="addCategory" action="{{route('category.store')}}" method="POST">
+                  <form class="form-horizontal" id="addCategory" action="{{route('category.store')}}" method="POST" enctype='multipart/form-data'>
                      @csrf
                       <div class="card-body">
                         <div class="form-group row">
@@ -93,6 +104,7 @@
                        </div>
                                <!-- /.card-body -->
                      <div class="card-footer">
+                        <a href="{{route('category.index')}}" class="btn btn-warning">All Categories</a>
                         <button type="submit" class="btn btn-info float-right">Submit</button>
                      </div>
                      <!-- /.card-footer -->

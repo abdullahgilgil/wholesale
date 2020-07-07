@@ -26,7 +26,7 @@
                   </div>
                   <!-- /.card-header -->
                   <!-- form start -->
-                  <form class="form-horizontal" id="addCategory">
+                  <form class="form-horizontal" id="addCategory" enctype='multipart/form-data' method="POST">
                      <div class="card-body">
                         <div class="form-group row">
                            <label for="name" class="col-sm-2 col-form-label">Name</label>
