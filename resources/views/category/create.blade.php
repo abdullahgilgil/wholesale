@@ -21,13 +21,13 @@
          <div class="row">
             <div class="col-lg-8 offset-lg-2">
                @if(session()->has('message'))
-                  <div style="position: relative; min-height: 60px;">
+                  <div style="position: relative; min-height: 60px;" class="col-12">
                      <div class="alert alert-dismissible alert-{{session('message_tur')}}" role="alert" style="position: absolute; top: 10px;">
                         <button class="close" type="button" data-dismiss="alert" aria-label="Close">
                            <span aria-hidden="true">&times;</span>
                         </button>
                         <strong>{{strtoupper(session('message_tur'))}}</strong>
-                        {{session('message')}}
+                        <strong>{{session('message')}}</strong>
                      </div>
                   </div>
                @endif

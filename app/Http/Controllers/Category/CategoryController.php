@@ -58,7 +58,7 @@ class CategoryController extends Controller
            ->with(['message'=> $category->name.' Added', 'message_tur' => 'success']);
     }
 
-    public function edit(Request $request,$id)
+    public function edit($id)
     {
 
        $cat = Category::where('id',$id)->first();
@@ -95,6 +95,20 @@ class CategoryController extends Controller
 
       return redirect()->route('category.edit', $category->id)
          ->with(['message'=> $category->name.' Updated', 'message_tur' => 'success']);
+   }
+
+   public function destroy(Request $request)
+   {
+      $id = $request->input('delete');
+      $category = Category::where('id', $id)->first();
+
+      if($category->image_path !== null){
+         Storage::disk('public')->delete($category->image_path);
+      }
+      $category->delete();
+
+      return redirect()->route('category.index')
+            ->with(['message'=>'Category Deleted', 'message_tur' => 'success']);
    }
 
 

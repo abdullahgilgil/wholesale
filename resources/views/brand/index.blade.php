@@ -32,6 +32,7 @@
                         <tr role="row">
                            <th class="sorting_asc">ID</th>
                            <th class="sorting">Name</th>
+                           <th class="sorting">Slug</th>
                            <th class="sorting">Description</th>
                            <th class="sorting">Image</th>
                            <th class="sorting">Edit</th>
@@ -39,16 +40,21 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($brands as $brand)
                            <tr role="row" class="odd">
-                              <td class="sorting_1 dtr-control">1</td>
-                              <td>Household</td>
-                              <td>household</td>
-                              <td>Household products is used for ...</td>
+                              <td class="sorting_1 dtr-control">{{$brand->id}}</td>
+                              <td>{{$brand->name}}</td>
+                              <td>{{$brand->slug}}</td>
+                              <td>{{$brand->description}}</td>
+                              <td><img src="{{$brand->image_path}}" alt="" style="max-height: 60px;"></td>
                               <td>
                                  <a href="" class="btn btn-sm btn-warning">Edit</a>
                               </td>
-                              <td><button class="btn btn-sm btn-danger">Delete</button></td>
+                              <td>
+                                 <button class="btn btn-sm btn-danger">Delete</button>
+                              </td>
                            </tr>
+                        @endforeach
                         </tbody>
                      </table>
                   </div>
