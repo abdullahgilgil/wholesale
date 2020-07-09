@@ -41,9 +41,9 @@ Route::group(["middleware" => "auth"], function() {
 //      Route::get('/{brand}', 'BrandController@show')->name('.show');
       Route::get('/create', 'BrandController@create')->name('.create');
       Route::post('/', 'BrandController@store')->name('.store');
-      Route::get('/{brand}/edit', 'BrandController@edit')->name('.edit');
+      Route::get('/{brand}/{slug}/edit', 'BrandController@edit')->name('.edit');
       Route::patch('/{brand}', 'BrandController@update')->name('.update');
-      Route::delete('/{brand}', 'BrandController@destroy')->name('.destroy');
+      Route::delete('/delete', 'BrandController@destroy')->name('.destroy');
 
    });
 

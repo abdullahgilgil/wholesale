@@ -45,15 +45,42 @@
                               <td class="sorting_1 dtr-control">{{$brand->id}}</td>
                               <td>{{$brand->name}}</td>
                               <td>{{$brand->slug}}</td>
-                              <td>{{$brand->description}}</td>
-                              <td><img src="{{$brand->image_path}}" alt="" style="max-height: 60px;"></td>
+                              <td>{!!$brand->description!!}</td>
+                              <td><img src="{{'storage/'.$brand->image_path}}" alt="" style="max-width: 60px;"></td>
                               <td>
-                                 <a href="" class="btn btn-sm btn-warning">Edit</a>
+                                 <a href="{{route('brand.edit', ['brand' => $brand->id, 'slug' => $brand->slug])}}" class="btn btn-sm btn-warning">Edit</a>
                               </td>
                               <td>
-                                 <button class="btn btn-sm btn-danger">Delete</button>
+                                 <!-- Button trigger modal -->
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#deleteModal-{{$brand->id}}">
+                                    Delete
+                                 </button>
                               </td>
                            </tr>
+                           <!-- Delete Modal -->
+                           <div class="modal fade" id="deleteModal-{{$brand->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h5 class="modal-title" id="exampleModalLabel">Are you sure to delete <strong>{{$brand->name}}</strong>?</h5>
+
+                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                       </button>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                       <form action="{{route('brand.destroy')}}" method="post">
+                                          @csrf
+                                          @method('delete')
+                                          <input type="hidden" name="delete" value="{{$brand->id}}">
+                                          <button type="submit" class="btn btn-danger">Delete</button>
+                                       </form>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                         @endforeach
                         </tbody>
                      </table>

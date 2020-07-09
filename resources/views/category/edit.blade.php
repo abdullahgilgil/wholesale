@@ -52,8 +52,6 @@
                                  </div>
                               @endif
                            </div>
-
-
                         </div>
                         <div class="form-group row">
                            <label class="col-sm-2 col-form-label" for="category">Parent Category</label>
