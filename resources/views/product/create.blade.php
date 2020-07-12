@@ -223,17 +223,17 @@
                         <div class="form-group row">
                            <label class="col-sm-2 col-form-label" for="category">Category</label>
                            <div class="col-sm-10">
-                              <div class="select2-purple" data-select2-id="38">
-                                 <select class="select2 select2-hidden-accessible {{$errors->has('category_id') ? 'is-invalid' : ''}}" value="{{old('category_id')}}" name="category_id[]" id="category" multiple="" data-placeholder="Select Parent Category" data-dropdown-css-class="select2-purple" style="width: 100%;" data-select2-id="15" tabindex="-1" aria-hidden="true">
+                              <div class="select2-purple {{$errors->has('categories') ? 'is-invalid' : ''}}" data-select2-id="38">
+                                 <select class="select2 select2-hidden-accessible" value="{{old('categories[]')}}" name="categories[]" id="category" multiple="" data-placeholder="Select Parent Category" data-dropdown-css-class="select2-purple" style="width: 100%;" data-select2-id="15" tabindex="-1" aria-hidden="true">
 
 {{--                                    <option data-select2-id="0" value="0">Select A Category</option>--}}
                                     @foreach($categories as $category)
-                                     <option value="$category->id">{{$category->name}}</option>
+                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                  </select>
-                                 @if($errors->has('category_id'))
+                                 @if($errors->has('categories'))
                                     <div class="text-danger mt-2">
-                                       {{$errors->first('category_id')}}
+                                       {{$errors->first('categories')}}
                                     </div>
                                  @endif
                               </div>

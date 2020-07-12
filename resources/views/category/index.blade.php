@@ -62,7 +62,7 @@
                            <tr role="row" class="odd">
                               <td class="sorting_1 dtr-control">{{$category->id}}</td>
                               <td>{{$category->name}}</td>
-                              <td>{{$category->parent_id}}</td>
+                              <td>{{$category->parent_category}}</td>
                               <td>{{$category->slug}}</td>
                               <td>{!! $category->description !!}</td>
                               <td><img src="{{asset('storage/'.$category->image_path)}}" alt="" style="max-height: 60px;"></td>

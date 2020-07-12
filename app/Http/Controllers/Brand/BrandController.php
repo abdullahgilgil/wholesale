@@ -25,7 +25,7 @@ class BrandController extends Controller
    public function store(Request $request)
    {
       $data = $request->validate([
-         'name' => 'required | min:4',
+         'name' => 'required | min:3',
          'description' => 'sometimes',
          'image_path' => 'required|mimes:jpeg,jpg,png,gif|max:10000'
       ]);
@@ -38,7 +38,7 @@ class BrandController extends Controller
       $data['image_path'] = $imagepath;
 
       // IMAGE INTERVENTION HERE
-      $img = Image::make(public_path('storage/' . $imagepath))->fit('200', '200');
+      $img = Image::make(public_path('storage/' . $imagepath))->resize('150', '150');
       $img->save();
 
       $brand = Brand::create($data);
@@ -78,7 +78,7 @@ class BrandController extends Controller
       $data['image_path'] = $imagepath;
 
       // IMAGE INTERVENTION HERE
-      $img = Image::make(public_path('storage/' . $imagepath))->resize('200', '200');
+      $img = Image::make(public_path('storage/' . $imagepath))->resize('150', '150');
       $img->save();
       }
       $brand->update($data);

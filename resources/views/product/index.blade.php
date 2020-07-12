@@ -41,18 +41,28 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($products as $product)
                         <tr role="row" class="odd">
-                           <td class="sorting_1 dtr-control">1</td>
-                           <td>Household</td>
-                           <td>Household products is used for ...</td>
-                           <td><img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="" style="max-height: 20px"></td>
-                           <td>150</td>
-                           <td>12,21,15,['Bath', ['Hair Care']</td>
+                           <td class="sorting_1 dtr-control">{{$product->product_code}}</td>
+                           <td>{{$product->name}}</td>
+                           <td>{{$product->description}}</td>
+                           <td class="d-flex">
+                           @foreach($product->images as $image)
+                               <img src="{{'storage/'.$image->image_path}}" alt="" style="max-height: 40px">
+                           @endforeach
+                           </td>
+                           <td>{{$product->stock}}</td>
                            <td>
-                              <a href="" class="btn btn-sm btn-warning">Edit</a>
+                               @foreach($product->categories as $cats)
+                                   {{$cats->name}} {{$loop->last ? '' : ','}}
+                               @endforeach
+                           </td>
+                           <td>
+                              <a href="{{route('product.edit',['product' => $product->id, 'slug'=>$product->slug])}}" class="btn btn-sm btn-warning">Edit</a>
                            </td>
                            <td><button class="btn btn-sm btn-danger">Delete</button></td>
                         </tr>
+                            @endforeach
                         </tbody>
                      </table>
                   </div>

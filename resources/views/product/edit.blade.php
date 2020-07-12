@@ -5,12 +5,12 @@
       <div class="container-fluid">
          <div class="row mb-2">
             <div class="col-sm-6">
-               <h1>Add New Product</h1>
+               <h1>Edit Product</h1>
             </div>
             <div class="col-sm-6">
                <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                  <li class="breadcrumb-item active">Add Product</li>
+                  <li class="breadcrumb-item active">Edit Product</li>
                </ol>
             </div>
          </div>
@@ -22,8 +22,8 @@
             <div class="col-lg-8 offset-lg-2">
                <div class="card card-info">
                   <div class="card-header">
-                     <h3 class="card-title">Add New Category</h3>
-
+                     <h3 class="card-title">Edit Product</h3>
+                    {{$product->name}}
                   </div>
                   <!-- /.card-header -->
                   <!-- form start -->

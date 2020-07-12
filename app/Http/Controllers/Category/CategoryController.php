@@ -42,13 +42,15 @@ class CategoryController extends Controller
 
          if($request->hasFile('image_path')) {
 
+
              $image = $request->file('image_path');
 
              $imagepath = Storage::disk('public')->putFile('/category_images', $image);
              $data['image_path'] = $imagepath;
 
              // IMAGE INTERVENTION HERE
-            $img = Image::make(public_path('storage/' . $imagepath))->fit('600', '360');
+            $img = Image::make(public_path('storage/' . $imagepath))->resize('600', '360');
+
             $img->save();
          }
 
@@ -88,8 +90,8 @@ class CategoryController extends Controller
          $data['image_path'] = $imagepath;
 
          // IMAGE INTERVENTION HERE
-//            $img = Image::make(public_path('storage/' . $imagepath))->fit('600', '360');
-//            $img->save();
+            $img = Image::make(public_path('storage/' . $imagepath))->resize('600', '360');
+            $img->save();
       }
       $category->update($data);
 

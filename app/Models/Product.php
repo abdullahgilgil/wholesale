@@ -13,7 +13,7 @@ class Product extends Model
 
     public function categories()
     {
-       return $this->belongsToMany(Product::class)->withTimestamps();
+       return $this->belongsToMany(Category::class)->withTimestamps();
     }
 
     public function brand()

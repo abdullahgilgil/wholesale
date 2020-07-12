@@ -30,17 +30,17 @@ class CreateProductsTable extends Migration
             $table->longText('uses')->nullable();
             $table->longText('tips')->nullable();
             $table->string('size');
-            $table->string('type');
+            $table->string('type')->nullable();
             $table->integer('vat_code');
             $table->decimal('cost_price',8,2)->nullable();
             $table->decimal('pack_price',8,2);
             $table->decimal('single_price',8,2)->nullable();
             $table->decimal('layer_price',8,2)->nullable();
             $table->decimal('pallet_price',8,2)->nullable();
-            $table->integer('case_qty');
-            $table->integer('layer_qty');
-            $table->integer('pallet_qty');
-            $table->integer('total_stock');
+            $table->integer('case_qty')->nullable();
+            $table->integer('layer_qty')->nullable();
+            $table->integer('pallet_qty')->nullable();
+            $table->integer('total_stock')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
