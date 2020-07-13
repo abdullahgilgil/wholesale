@@ -27,6 +27,17 @@
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
+                     @if(session()->has('message'))
+                        <div style="position: relative; min-height: 60px;" class="col-12">
+                           <div class="alert alert-dismissible alert-{{session('message_tur')}}" role="alert" style="position: absolute; top: 10px;">
+                              <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                              </button>
+                              <strong>{{strtoupper(session('message_tur'))}}</strong>
+                              {{session('message')}}
+                           </div>
+                        </div>
+                     @endif
                      <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
                         <thead>
                         <tr role="row">
@@ -42,27 +53,56 @@
                         </thead>
                         <tbody>
                         @foreach($products as $product)
-                        <tr role="row" class="odd">
-                           <td class="sorting_1 dtr-control">{{$product->product_code}}</td>
-                           <td>{{$product->name}}</td>
-                           <td>{{$product->description}}</td>
-                           <td class="d-flex">
-                           @foreach($product->images as $image)
-                               <img src="{{'storage/'.$image->image_path}}" alt="" style="max-height: 40px">
-                           @endforeach
-                           </td>
-                           <td>{{$product->stock}}</td>
-                           <td>
-                               @foreach($product->categories as $cats)
-                                   {{$cats->name}} {{$loop->last ? '' : ','}}
-                               @endforeach
-                           </td>
-                           <td>
-                              <a href="{{route('product.edit',['product' => $product->id, 'slug'=>$product->slug])}}" class="btn btn-sm btn-warning">Edit</a>
-                           </td>
-                           <td><button class="btn btn-sm btn-danger">Delete</button></td>
-                        </tr>
-                            @endforeach
+                           <tr role="row" class="odd">
+                              <td class="sorting_1 dtr-control">{{$product->product_code}}</td>
+                              <td>{{$product->name}}</td>
+                              <td>{{$product->description}}</td>
+                              <td class="d-flex">
+                              @foreach($product->images as $image)
+                                  <img src="{{'storage/'.$image->image_path}}" alt="" style="max-height: 40px">
+                              @endforeach
+                              </td>
+                              <td>{{$product->stock}}</td>
+                              <td>
+                                  @foreach($product->categories as $cats)
+                                      {{$cats->name}} {{$loop->last ? '' : ','}}
+                                  @endforeach
+                              </td>
+                              <td>
+                                 <a href="{{route('product.edit',['product' => $product->id, 'slug'=>$product->slug])}}" class="btn btn-sm btn-warning">Edit</a>
+                              </td>
+                              <td>
+                                 <!-- Button trigger modal -->
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#deleteModal-{{$product->id}}">
+                                    Delete
+                                 </button>
+                              </td>
+                           </tr>
+                           <!-- Delete Modal -->
+                           <div class="modal fade" id="deleteModal-{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h5 class="modal-title" id="exampleModalLabel">Are you sure to delete <strong>{{$product->name}}</strong>?</h5>
+
+                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                       </button>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                       <form action="{{route('product.destroy')}}" method="post">
+                                          @csrf
+                                          @method('delete')
+                                          <input type="hidden" name="delete" value="{{$product->id}}">
+                                          <button type="submit" class="btn btn-danger">Delete</button>
+                                       </form>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                         @endforeach
                         </tbody>
                      </table>
                   </div>

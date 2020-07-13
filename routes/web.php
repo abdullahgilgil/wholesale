@@ -55,7 +55,7 @@ Route::group(["middleware" => "auth"], function() {
       Route::post('/', 'ProductController@store')->name('.store');
       Route::get('/{product}/{slug}/edit', 'ProductController@edit')->name('.edit');
       Route::patch('/{product}', 'ProductController@update')->name('.update');
-      Route::delete('/{product}', 'ProductController@destroy')->name('.destroy');
+      Route::delete('/delete', 'ProductController@destroy')->name('.destroy');
 
    });
 

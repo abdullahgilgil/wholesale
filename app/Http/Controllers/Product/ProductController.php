@@ -85,7 +85,7 @@ class ProductController extends Controller
                 ->with(['message' => $product->name . ' Added', 'message_tur' => 'success']);
 
 
-   }  // store
+   }  // STORE
 
     public function edit(Request $request, $id)
     {
@@ -93,6 +93,73 @@ class ProductController extends Controller
         $brands = Brand::all();
         $categories = Category::all();
         return view('product.edit', compact('product', 'categories', 'brands'));
-    }
+    } // EDIT
+
+    public function update (Request $request, $id)
+    {
+//       $this->validateImagesAndCategories();
+
+       $data = $request->validate([
+          'name' => 'required',
+          'product_code' => 'required|unique:products',
+          'pack_barcode' => 'required',
+          'single_barcode' => 'required',
+          'size' => 'required',
+          'type' => 'required',
+          'vat_code' => 'required',
+          'pack_price' => 'required',
+          'single_price' => 'required',
+          'case_qty' => 'required',
+          'brand_id' => 'required',
+       ]);
+       $data['slug'] = Str::slug($request->name, '-');
+
+       $product = Product::where('id', $id)->first();
+       $product->update($data);
+       $product->categories()->sync($request->categories);
+
+       // IF REQUEST HAS FILE
+       if(request()->hasFile('images')){
+          foreach($product->images as $img):
+             Storage::disk('public')->delete($img->image_path);
+             $product->images()->delete($img);
+          endforeach;
+
+          $images = request()->file('images');
+          foreach ($images as $image):
+             // FILE UPLOADS CODE HERE
+             $imagepath = Storage::disk('public')->putFile('/product_images', $image);
+
+             $productImage = $product->images()->create([
+                'product_id' => $product->id,
+                'image_path' => $imagepath
+             ]);
+
+             // IMAGE INTERVENTION HERE
+             $img = Image::make(public_path('storage/' . $productImage->image_path))->resize('600', '360');
+             $img->save();
+          endforeach;
+       }
+
+
+       return redirect()->route('product.edit',['product' => $product->id, 'slug' => $product->slug])
+          ->with(['message' => $product->name . ' Updated', 'message_tur' => 'success']);
+
+    } // UPDATE
+
+
+   public function destroy(Request $request)
+   {
+      $product = Product::where('id', $request->delete)->first();
+
+      foreach($product->images as $img):
+         Storage::disk('public')->delete($img->image_path);
+      endforeach;
+
+      $product->delete();
+
+      return redirect()->route('product.index')
+         ->with(['message' => 'Product Deleted', 'message_tur' => 'success']);
+   }
 
 }

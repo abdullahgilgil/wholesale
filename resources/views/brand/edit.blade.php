@@ -88,6 +88,7 @@
                      </div>
                      <!-- /.card-body -->
                      <div class="card-footer">
+                        <a href="{{route('brand.index')}}" class="btn btn-warning">All Brands</a>
                         <button type="submit" class="btn btn-info float-right">Submit</button>
                      </div>
                      <!-- /.card-footer -->

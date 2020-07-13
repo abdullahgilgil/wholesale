@@ -20,9 +20,20 @@
       <div class="container-fluid">
          <div class="row">
             <div class="col-lg-8 offset-lg-2">
+               @if(session()->has('message'))
+                  <div style="position: relative; min-height: 60px;" class="col-12">
+                     <div class="alert alert-dismissible alert-{{session('message_tur')}}" role="alert" style="position: absolute; top: 10px;">
+                        <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>{{strtoupper(session('message_tur'))}}</strong>
+                        <strong>{{session('message')}}</strong>
+                     </div>
+                  </div>
+               @endif
                <div class="card card-info">
                   <div class="card-header">
-                     <h3 class="card-title">Add New Category</h3>
+                     <h3 class="card-title">Add New Product</h3>
 
                   </div>
                   <!-- /.card-header -->
@@ -152,6 +163,59 @@
                               @endif
                            </div>
                         </div><!-- Single Price -->
+
+                        <div class="form-group row">
+                           <label class="col-sm-2 col-form-label" for="category">Category</label>
+                           <div class="col-sm-10">
+                              <div class="select2-purple {{$errors->has('categories') ? 'is-invalid' : ''}}" data-select2-id="38">
+                                 <select class="select2 select2-hidden-accessible" value="{{old('categories[]')}}" name="categories[]" id="category" multiple="" data-placeholder="Select Parent Category" data-dropdown-css-class="select2-purple" style="width: 100%;" data-select2-id="15" tabindex="-1" aria-hidden="true">
+
+                                    {{--                                    <option data-select2-id="0" value="0">Select A Category</option>--}}
+                                    @foreach($categories as $category)
+                                       <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
+                                 </select>
+                                 @if($errors->has('categories'))
+                                    <div class="text-danger mt-2">
+                                       {{$errors->first('categories')}}
+                                    </div>
+                                 @endif
+                              </div>
+                           </div>
+                        </div><!-- Category -->
+                        <div class="form-group row">
+                           <label for="brand" class="col-sm-2 col-form-label">Brand</label>
+                           <div class="col-sm-10">
+                              <select class="form-control" id="brand" name="brand_id">
+                                 <option value="">Select Brand</option>
+                                 @foreach($brands as $brand)
+                                    <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                 @endforeach
+                              </select>
+                              @if($errors->has('brand_id'))
+                                 <div class="text-danger mt-2">
+                                    {{$errors->first('brand_id')}}
+                                 </div>
+                              @endif
+                           </div>
+
+                        </div><!-- Brand -->
+
+                        <div class="form-group row">
+                           <label for="images" class="col-sm-2 col-form-label">Product Image(s)</label>
+                           <div class="input-group col-sm-10">
+                              <div class="custom-file">
+                                 <input type="file" class="custom-file-input {{$errors->has('images') ? 'is-invalid' : ''}}" id="images" name="images[]" multiple>
+                                 <label class="custom-file-label" for="exampleInputFile">Choose Product Image(s)</label>
+                              </div>
+                              @if($errors->has('images'))
+                                 <div class="text-danger mt-2">
+                                    {{$errors->first('images')}}
+                                 </div>
+                              @endif
+                           </div>
+                        </div><!-- Images -->
+
                         <div class="form-group row">
                            <label for="layer_price" class="col-sm-2 col-form-label">Layer Price</label>
                            <div class="col-sm-10">
@@ -220,42 +284,6 @@
                            </div>
                         </div><!-- Total Stock -->
 
-                        <div class="form-group row">
-                           <label class="col-sm-2 col-form-label" for="category">Category</label>
-                           <div class="col-sm-10">
-                              <div class="select2-purple {{$errors->has('categories') ? 'is-invalid' : ''}}" data-select2-id="38">
-                                 <select class="select2 select2-hidden-accessible" value="{{old('categories[]')}}" name="categories[]" id="category" multiple="" data-placeholder="Select Parent Category" data-dropdown-css-class="select2-purple" style="width: 100%;" data-select2-id="15" tabindex="-1" aria-hidden="true">
-
-{{--                                    <option data-select2-id="0" value="0">Select A Category</option>--}}
-                                    @foreach($categories as $category)
-                                     <option value="{{$category->id}}">{{$category->name}}</option>
-                                    @endforeach
-                                 </select>
-                                 @if($errors->has('categories'))
-                                    <div class="text-danger mt-2">
-                                       {{$errors->first('categories')}}
-                                    </div>
-                                 @endif
-                              </div>
-                           </div>
-                        </div><!-- Category -->
-                        <div class="form-group row">
-                           <label for="brand" class="col-sm-2 col-form-label">Brand</label>
-                           <div class="col-sm-10">
-                              <select class="form-control" id="brand" name="brand_id">
-                                 <option value="">Select Brand</option>
-                                 @foreach($brands as $brand)
-                                    <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                 @endforeach
-                              </select>
-                              @if($errors->has('brand_id'))
-                                 <div class="text-danger mt-2">
-                                    {{$errors->first('brand_id')}}
-                                 </div>
-                              @endif
-                           </div>
-
-                        </div><!-- Brand -->
 
                         <div class="form-group row">
                            <label for="description" class="col-sm-2 col-form-label">Description</label>
@@ -360,24 +388,12 @@
                            </div>
                         </div><!-- Tips -->
 
-                        <div class="form-group row">
-                           <label for="images" class="col-sm-2 col-form-label">Product Image(s)</label>
-                           <div class="input-group col-sm-10">
-                              <div class="custom-file">
-                                 <input type="file" class="custom-file-input {{$errors->has('images') ? 'is-invalid' : ''}}" id="images" name="images[]" multiple>
-                                 <label class="custom-file-label" for="exampleInputFile">Choose Product Image(s)</label>
-                              </div>
-                              @if($errors->has('images'))
-                                 <div class="text-danger mt-2">
-                                    {{$errors->first('images')}}
-                                 </div>
-                              @endif
-                           </div>
-                        </div><!-- Images -->
+
 
                      </div>
                      <!-- /.card-body -->
                      <div class="card-footer">
+                        <a href="{{route('product.index')}}" class="btn btn-warning">All Products</a>
                         <button type="submit" class="btn btn-info float-right">Submit</button>
                      </div>
                      <!-- /.card-footer -->
