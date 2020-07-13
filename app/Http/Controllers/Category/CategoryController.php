@@ -49,7 +49,7 @@ class CategoryController extends Controller
              $data['image_path'] = $imagepath;
 
              // IMAGE INTERVENTION HERE
-            $img = Image::make(public_path('storage/' . $imagepath))->resize('600', '360');
+            $img = Image::make(public_path('storage/' . $imagepath))->resize('500', '500');
 
             $img->save();
          }
@@ -90,7 +90,7 @@ class CategoryController extends Controller
          $data['image_path'] = $imagepath;
 
          // IMAGE INTERVENTION HERE
-            $img = Image::make(public_path('storage/' . $imagepath))->resize('600', '360');
+            $img = Image::make(public_path('storage/' . $imagepath))->resize('500', '500');
             $img->save();
       }
       $category->update($data);

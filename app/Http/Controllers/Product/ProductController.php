@@ -73,7 +73,7 @@ class ProductController extends Controller
                   ]);
 
                   // IMAGE INTERVENTION HERE
-                  $img = Image::make(public_path('storage/' . $productImage->image_path))->resize('600', '360');
+                  $img = Image::make(public_path('storage/' . $productImage->image_path))->resize('500', '500');
                   $img->save();
               } // foreach
           }
@@ -136,7 +136,7 @@ class ProductController extends Controller
              ]);
 
              // IMAGE INTERVENTION HERE
-             $img = Image::make(public_path('storage/' . $productImage->image_path))->resize('600', '360');
+             $img = Image::make(public_path('storage/' . $productImage->image_path))->resize('500', '500');
              $img->save();
           endforeach;
        }
