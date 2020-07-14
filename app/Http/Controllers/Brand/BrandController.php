@@ -38,8 +38,8 @@ class BrandController extends Controller
       $data['image_path'] = $imagepath;
 
       // IMAGE INTERVENTION HERE
-      $img = Image::make(public_path('storage/' . $imagepath))->resize('150', '150');
-      $img->save();
+//      $img = Image::make(public_path('storage/' . $imagepath))->resize('150', '150');
+//      $img->save();
 
       $brand = Brand::create($data);
 
@@ -72,14 +72,15 @@ class BrandController extends Controller
             Storage::disk('public')->delete($brand->image_path);
          }
 
-      $image = $request->file('image_path');
+         $image = $request->file('image_path');
 
-      $imagepath = Storage::disk('public')->putFile('/brand_images', $image);
-      $data['image_path'] = $imagepath;
+         $imagepath = Storage::disk('public')->putFile('/brand_images', $image);
+         $data['image_path'] = $imagepath;
 
-      // IMAGE INTERVENTION HERE
-      $img = Image::make(public_path('storage/' . $imagepath))->resize('150', '150');
-      $img->save();
+         // IMAGE INTERVENTION HERE
+//         $img = Image::make(public_path('storage/' . $imagepath))->resize('150', '150');
+//         $img->save();
+
       }
       $brand->update($data);
 

@@ -73,8 +73,9 @@ class ProductController extends Controller
                   ]);
 
                   // IMAGE INTERVENTION HERE
-                  $img = Image::make(public_path('storage/' . $productImage->image_path))->resize('500', '500');
-                  $img->save();
+//                  $img = Image::make(public_path('storage/' . $productImage->image_path))->resize('500', '500');
+//                  $img->save();
+
               } // foreach
           }
 
@@ -98,10 +99,11 @@ class ProductController extends Controller
     public function update (Request $request, $id)
     {
 //       $this->validateImagesAndCategories();
+       $product = Product::where('id', $id)->first();
 
        $data = $request->validate([
           'name' => 'required',
-          'product_code' => 'required|unique:products',
+          'product_code' => 'required',
           'pack_barcode' => 'required',
           'single_barcode' => 'required',
           'size' => 'required',
@@ -114,7 +116,7 @@ class ProductController extends Controller
        ]);
        $data['slug'] = Str::slug($request->name, '-');
 
-       $product = Product::where('id', $id)->first();
+//       $product = Product::where('id', $id)->first();
        $product->update($data);
        $product->categories()->sync($request->categories);
 
@@ -136,8 +138,9 @@ class ProductController extends Controller
              ]);
 
              // IMAGE INTERVENTION HERE
-             $img = Image::make(public_path('storage/' . $productImage->image_path))->resize('500', '500');
-             $img->save();
+//             $img = Image::make(public_path('storage/' . $productImage->image_path))->resize('500', '500');
+//             $img->save();
+
           endforeach;
        }
 

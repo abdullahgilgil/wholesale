@@ -173,7 +173,11 @@
 
                                     {{--                                    <option data-select2-id="0" value="0">Select A Category</option>--}}
                                     @foreach($categories as $category)
-                                       <option value="{{$category->id}}">{{$category->name}}</option>
+                                       <option value="{{$category->id}}"
+                                       @foreach($product->categories as $cat)
+                                          {{$category->id == $cat->id ? 'selected' : ''}}
+                                       @endforeach
+                                       >{{$category->name}}</option>
                                     @endforeach
                                  </select>
                                  @if($errors->has('categories'))
@@ -184,13 +188,16 @@
                               </div>
                            </div>
                         </div><!-- Category -->
+
                         <div class="form-group row">
                            <label for="brand" class="col-sm-2 col-form-label">Brand</label>
                            <div class="col-sm-10">
                               <select class="form-control" id="brand" name="brand_id">
                                  <option value="">Select Brand</option>
                                  @foreach($brands as $brand)
-                                    <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                    <option value="{{$brand->id}}"
+                                       {{$brand->id == $product->brand_id ? 'selected' : ''}}
+                                    >{{$brand->name}}</option>
                                  @endforeach
                               </select>
                               @if($errors->has('brand_id'))

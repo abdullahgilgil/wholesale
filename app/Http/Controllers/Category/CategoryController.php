@@ -49,9 +49,9 @@ class CategoryController extends Controller
              $data['image_path'] = $imagepath;
 
              // IMAGE INTERVENTION HERE
-            $img = Image::make(public_path('storage/' . $imagepath))->resize('500', '500');
-
-            $img->save();
+//            $img = Image::make(public_path('storage/' . $imagepath))->resize('500', '500');
+//
+//            $img->save();
          }
 
          $category = Category::create($data);
@@ -90,8 +90,8 @@ class CategoryController extends Controller
          $data['image_path'] = $imagepath;
 
          // IMAGE INTERVENTION HERE
-            $img = Image::make(public_path('storage/' . $imagepath))->resize('500', '500');
-            $img->save();
+//            $img = Image::make(public_path('storage/' . $imagepath))->resize('500', '500');
+//            $img->save();
       }
       $category->update($data);
 
