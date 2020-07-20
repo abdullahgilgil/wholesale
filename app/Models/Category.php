@@ -15,4 +15,14 @@ class Category extends Model
     {
        return $this->belongsToMany(Product::class)->withTimestamps();
     }
+
+    public function brands()
+    {
+       return $this->belongsToMany(Brand::class)->withTimestamps();
+    }
+
+    public function subcategory()
+    {
+       return $this->hasMany(Category::class, 'parent_category');
+    }
 }

@@ -22,6 +22,10 @@ Route::group(["middleware" => "auth"], function() {
 //   });
 
    Route::get('/', 'HomeController@index')->name('home');
+   Route::get('/dropdown', 'HomeController@dropdown')->name('dropdown');
+   Route::get('/categories', 'HomeController@categories')->name('categories');
+   Route::get('/brands', 'HomeController@brands')->name('brands');
+   Route::get('/products', 'HomeController@products')->name('products');
 
    Route::group(["prefix" => "category", "as" => "category", "namespace" => "Category"], function() {
 
