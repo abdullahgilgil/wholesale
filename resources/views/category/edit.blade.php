@@ -103,6 +103,24 @@
                            <img src="{{asset('storage/'.$cat->image_path)}}" alt="" style="max-height: 60px;">
                            @endif
                         </div><!-- Images -->
+
+                        <div class="form-group row">
+                           <label class="col-sm-2 col-form-label" for="is_active">Is Category Active?</label>
+                           <div class="col-sm-10">
+                              <div class="">
+                                 <select class="form-control" name="is_active" id="is_active">
+                                    <option value="1" {{$category->is_active == '1' ? 'selected' : ''}}>Active</option>
+                                    <option value="0" {{$category->is_active == '0' ? 'selected' : ''}}>Passive</option>
+                                 </select>
+
+                                 @if($errors->has('is_active'))
+                                    <div class="text  -danger mt-2">
+                                       {{$errors->first('is_active')}}
+                                    </div>
+                                 @endif
+                              </div>
+                           </div>
+                        </div> <!-- is_active -->
                   
                      </div>
                      <!-- /.card-body -->

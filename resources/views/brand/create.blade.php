@@ -74,13 +74,51 @@
                                  <label class="custom-file-label" for="exampleInputFile">Choose Brand Image</label>
                               </div>
                            </div>
-
                         </div>
                         @if($errors->has('image_path'))
                            <div class="text-danger mt-2">
                               {{$errors->first('image_path')}}
                            </div>
                         @endif
+
+                        <div class="form-group row">
+                           <label class="col-sm-2 col-form-label" for="is_active">Is Brand Active ?</label>
+                           <div class="col-sm-10">
+                              <div class="">
+                                 <select class="form-control" name="is_active" id="is_active">
+                                    <option value="1" selected>Active</option>
+                                    <option value="0" {{old('is_active')  == '0' ? 'selected' : ''}}>Passive</option>
+                                 </select>
+
+                                 @if($errors->has('is_active'))
+                                    <div class="text-danger mt-2">
+                                       {{$errors->first('is_active')}}
+                                    </div>
+                                 @endif
+                              </div>
+                           </div>
+                        </div> <!-- is_active -->
+
+                        <div class="form-group row">
+                           <label class="col-sm-2 col-form-label" for="category">Category</label>
+                           <div class="col-sm-10">
+                              <div class="select2-purple {{$errors->has('categories') ? 'is-invalid' : ''}}" data-select2-id="38">
+                                 <select class="select2 select2-hidden-accessible" value="{{old('categories[]')}}" name="categories[]" id="category" multiple="" data-placeholder="Select Category" data-dropdown-css-class="select2-purple" style="width: 100%;" data-select2-id="15" tabindex="-1" aria-hidden="true">
+
+                                 {{--<option data-select2-id="0" value="0">Select A Category</option>--}}
+                                    @foreach($categories as $category)
+                                       <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
+                                 </select>
+                                 @if($errors->has('categories'))
+                                    <div class="text-danger mt-2">
+                                       {{$errors->first('categories')}}
+                                    </div>
+                                 @endif
+                              </div>
+                           </div>
+                        </div><!-- Category -->
+
                      </div>
                      <!-- /.card-body -->
                      <div class="card-footer">
@@ -97,7 +135,24 @@
 @endsection()
 
 @push("customCss")
+   <!-- Select2 -->
+   <link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
+   <link rel="stylesheet" href="{{asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 @endpush()
 
 @push("customJs")
+   <!-- Select2 -->
+   <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
+
+   <script>
+       $(function(){
+           //Initialize Select2 Elements
+           $('.select2').select2();
+
+           //Initialize Select2 Elements
+           $('.select2bs4').select2({
+               theme: 'bootstrap4'
+           });
+       });
+   </script>
 @endpush()

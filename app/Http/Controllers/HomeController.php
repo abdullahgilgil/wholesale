@@ -35,14 +35,21 @@ class HomeController extends Controller
 
    public function brands()
    {
-      $categories = Category::where('parent_category', '0')->get();
+      $categories = Category::where(['parent_category' => '0', 'is_active' => 1])->get();
       return view('frontside.brands', compact('categories'));
    }
 
    public function categories()
    {
-      $categories = Category::where('parent_category', '0')->get();
+      $categories = Category::where(['parent_category' => '0', 'is_active' => '1'])->get();
       return view('frontside.categories', compact('categories'));
+   }
+
+   public function category(Request $request, $id)
+   {
+      $category = Category::where(['id' => $id, 'is_active' => 1])->first();
+
+      return view('frontside.category', compact('category'));
    }
 
    public function products()

@@ -41,6 +41,7 @@ class CreateProductsTable extends Migration
             $table->integer('layer_qty')->nullable();
             $table->integer('pallet_qty')->nullable();
             $table->integer('total_stock')->nullable();
+            $table->boolean('is_active')->default('1');
             $table->timestamps();
             $table->softDeletes();
 

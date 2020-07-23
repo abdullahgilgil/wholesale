@@ -54,6 +54,7 @@
 
 
                         </div>
+
                         <div class="form-group row">
                            <label class="col-sm-2 col-form-label" for="category">Parent Category</label>
                            <div class="col-sm-10">
@@ -64,6 +65,16 @@
                                     @if($categories)
                                        @foreach($categories as $category)
                                           <option value="{{$category->id}}" {{old('parent_category') == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                          @if($category->subcategory()->count())
+                                             @foreach($category->subcategory as $subcat)
+                                             <option value="{{$subcat->id}}" {{old('parent_category') == $subcat->id ? 'selected' : ''}}> -- {{$subcat->name}}</option>
+                                                @if($subcat->subcategory()->count())
+                                                   @foreach($subcat->subcategory as $subsubcat)
+                                                      <option class="" value="{{$subsubcat->id}}" {{old('parent_category') == $subsubcat->id ? 'selected' : ''}}> ---- {{  $subsubcat->name}}</option>
+                                                   @endforeach
+                                                @endif
+                                             @endforeach
+                                          @endif
                                        @endforeach
                                     @endif
                                  </select>
@@ -76,6 +87,7 @@
                               </div>
                            </div>
                         </div>
+
                         <div class="form-group row">
                            <label for="description" class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-10">
@@ -100,6 +112,24 @@
                                </div>
                             </div>
                          </div><!-- Images -->
+
+                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="is_active">Is Category Active?</label>
+                            <div class="col-sm-10">
+                               <div cla   ss="">
+                                  <select class="form-control" name="is_active" id="is_active">
+                                     <option value="1" selected>Active</option>
+                                     <option value="0" {{old('is_active')  == '0' ? 'selected' : ''}}>Passive</option>
+                                  </select>
+
+                                  @if($errors->has('is_active'))
+                                     <div class="text-danger mt-2">
+                                        {{$errors->first('is_active')}}
+                                     </div>
+                                  @endif
+                               </div>
+                            </div>
+                         </div> <!-- is_active -->
 
                        </div>
                                <!-- /.card-body -->

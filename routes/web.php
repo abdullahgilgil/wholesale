@@ -23,7 +23,8 @@ Route::group(["middleware" => "auth"], function() {
 
    Route::get('/', 'HomeController@index')->name('home');
    Route::get('/dropdown', 'HomeController@dropdown')->name('dropdown');
-   Route::get('/categories', 'HomeController@categories')->name('categories');
+   Route::get('/cat', 'HomeController@categories')->name('categories');
+   Route::get('/cat/{id}', 'HomeController@category')->name('showcategory');
    Route::get('/brands', 'HomeController@brands')->name('brands');
    Route::get('/products', 'HomeController@products')->name('products');
 

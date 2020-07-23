@@ -25,7 +25,7 @@ class CategoryController extends Controller
    public function create()
    {
 
-      $categories = Category::all();
+      $categories = Category::where('parent_category',0)->get();
       return view('category.create', compact('categories'));
 
    }
@@ -36,7 +36,8 @@ class CategoryController extends Controller
         $data = $request->validate([
             'name' => 'required | min:4',
             'parent_category' => 'required',
-            'description' => 'sometimes|required|min:20'
+            'description' => 'sometimes|required|min:20',
+            'is_active' => 'sometimes',
         ]);
         $data['slug'] = Str::slug($request->name, '-');
 
@@ -75,7 +76,8 @@ class CategoryController extends Controller
       $data = $request->validate([
          'name' => 'required | min:4',
          'parent_category' => 'required',
-         'description' => 'sometimes|required|min:20'
+         'description' => 'sometimes|required|min:20',
+         'is_active' => 'sometimes',
       ]);
       $data['slug'] = Str::slug($request->name, '-');
 

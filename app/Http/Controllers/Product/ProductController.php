@@ -51,6 +51,7 @@ class ProductController extends Controller
          'single_price' => 'required',
          'case_qty' => 'required',
          'brand_id' => 'required',
+         'is_active' => 'sometimes',
       ]);
       $data['slug'] = Str::slug($request->name, '-');
 
@@ -113,6 +114,7 @@ class ProductController extends Controller
           'single_price' => 'required',
           'case_qty' => 'required',
           'brand_id' => 'required',
+          'is_active' => 'sometimes',
        ]);
        $data['slug'] = Str::slug($request->name, '-');
 

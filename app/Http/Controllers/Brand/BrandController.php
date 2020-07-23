@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Brand;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -19,7 +20,8 @@ class BrandController extends Controller
 
    public function create ()
    {
-      return view('brand.create');
+      $categories = Category::all();
+      return view('brand.create', compact('categories'));
    }
 
    public function store(Request $request)
@@ -27,7 +29,8 @@ class BrandController extends Controller
       $data = $request->validate([
          'name' => 'required | min:3',
          'description' => 'sometimes',
-         'image_path' => 'required|mimes:jpeg,jpg,png,gif|max:10000'
+         'image_path' => 'required|mimes:jpeg,jpg,png,gif|max:10000',
+         'is_active' => 'sometimes',
       ]);
 
       $data['slug'] = Str::slug($request->name, '-');
@@ -42,6 +45,7 @@ class BrandController extends Controller
 //      $img->save();
 
       $brand = Brand::create($data);
+      $brand->categories()->attach($request->categories);
 
       return redirect()->route('brand.create')
             ->with(['message'=> $brand->name.' Added', 'message_tur' => 'success']);
@@ -51,7 +55,8 @@ class BrandController extends Controller
    public function edit($id, $slug)
    {
       $brand = Brand::where(['id' => $id, 'slug' => $slug])->first();
-      return view('brand.edit', compact('brand'));
+      $categories = Category::all();
+      return view('brand.edit', compact('brand','categories'));
    }
 
    public function update(Request $request, $id)
@@ -62,7 +67,8 @@ class BrandController extends Controller
       $data = $request->validate([
          'name' => 'required | min:4',
          'description' => 'sometimes',
-         'image_path' => 'sometimes|mimes:jpeg,jpg,png,gif|max:10000'
+         'image_path' => 'sometimes|mimes:jpeg,jpg,png,gif|max:10000',
+         'is_active' => 'sometimes',
       ]);
 
       $data['slug'] = Str::slug($request->name, '-');
@@ -83,7 +89,7 @@ class BrandController extends Controller
 
       }
       $brand->update($data);
-
+      $brand->categories()->sync($request->categories);
       return redirect()->route('brand.edit', ['brand' => $brand->id, 'slug' => $brand->slug])
             ->with(['message'=> $brand->name.' Updated', 'message_tur' => 'success']);
 

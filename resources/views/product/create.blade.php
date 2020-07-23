@@ -217,6 +217,24 @@
                         </div><!-- Images -->
 
                         <div class="form-group row">
+                           <label class="col-sm-2 col-form-label" for="is_active">Is Product Active ?</label>
+                           <div class="col-sm-10">
+                              <div class="">
+                                 <select class="form-control" name="is_active" id="is_active">
+                                    <option value="1" selected>Active</option>
+                                    <option value="0" {{old('is_active')  == '0' ? 'selected' : ''}}>Passive</option>
+                                 </select>
+
+                                 @if($errors->has('is_active'))
+                                    <div class="text-danger mt-2">
+                                       {{$errors->first('is_active')}}
+                                    </div>
+                                 @endif
+                              </div>
+                           </div>
+                        </div> <!-- is_active -->
+
+                        <div class="form-group row">
                            <label for="layer_price" class="col-sm-2 col-form-label">Layer Price</label>
                            <div class="col-sm-10">
                               <input type="number" step="0.01" class="form-control {{$errors->has('layer_price') ? 'is-invalid' : ''}}" id="layer_price" name="layer_price" placeholder="Layer Price" value="{{old('layer_price')}}">
